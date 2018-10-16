@@ -1,0 +1,18 @@
+body {
+  background-image: url(/images/table.png?60912cbd593fd6f3c9e00d97bb17fd44);
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.home h1 {
+  font-size: 5em;
+  font-weight: bold;
+}
+
+.home img {
+  width: 80%;
+  margin-top: 100px;
+}
+
