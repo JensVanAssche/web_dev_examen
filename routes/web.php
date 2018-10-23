@@ -15,6 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/meedoen', function () {
+    return view('form');
+});
+
+Route::post('/meedoen', 'ParticipantsController@store');
+
+Route::resource('/dashboard', 'ParticipantsController');
+
+Route::get('/dankjewel', function () {
+    return view('thankyou');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -6,13 +6,45 @@ body {
   margin: 0;
 }
 
-.home h1 {
-  font-size: 5em;
-  font-weight: bold;
+.admin-nav {
+  background-color: #d90210;
 }
 
-.home img {
-  width: 80%;
-  margin-top: 100px;
+.admin-nav p,
+.admin-nav a {
+  color: #fff;
+}
+
+.main {
+  min-height: 100vh;
+  padding-top: 100px;
+}
+
+.main .main-title {
+  font-size: 5em;
+  font-weight: bold;
+  color: #d90210;
+}
+
+.main .main-jar {
+  width: 250px;
+  margin-top: 50px;
+}
+
+.main .color-red {
+  color: #d90210;
+}
+
+.main .color-black {
+  color: #000;
+}
+
+.main .card {
+  -webkit-box-shadow: 0px 5px 25px;
+          box-shadow: 0px 5px 25px;
+}
+
+ul {
+  margin-bottom: 0 !important;
 }
 
