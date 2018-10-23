@@ -9,6 +9,7 @@
     <div class="row">
         <div class="col">
             <h4>Met de code op het deksel van je Nutella pot kan je veel prijzen winnen! Waag nu je kans!</h4>
+            <h4>Volgende winnaar wordt bekend gemaakt op:</h4>
         </div>
         <div class="col">
             <h2>Prijzen</h2>
