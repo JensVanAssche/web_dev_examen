@@ -3,17 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Participant;
+use App\Code;
 use Illuminate\Http\Request;
 
 class ParticipantsController extends Controller
 {
-	public function index()
-    {
-        $participants = Participant::all();
-        return view('participants.index')->with('participants', $participants);
-    }
-
-    public function store(Request $request)
+	public function store(Request $request)
 	{
 		$request->validate([
 	        'firstname' => 'required',
@@ -21,16 +16,31 @@ class ParticipantsController extends Controller
 	        'adress' => 'required',
 	        'city' => 'required',
 	        'zip' => 'required|numeric|digits:4',
-	        'email' => 'required|email|unique:participants'
+	        'email' => 'required|email',
+	        'code' => 'required|min:8|max:8|unique:codes'
 	    ]);
-		$participant = Participant::create($request->all());
-		return redirect('/dankjewel');
-	}
 
-	public function destroy($id)
-	{     
-		$participant = Participant::findOrFail($id);
-	    $participant->delete();
-	    return redirect()->route('dashboard.index')->with('success', 'Deelnemer succesvol verwijderd');
+	    if(Participant::where('email', '=', $request->input('email'))->exists()) {
+	    	//email exists
+	    	$p = Participant::where('email', '=', $request->input('email'))->first();
+	    }
+	    else {
+	    	//email doesnt exist
+			$p = new Participant;
+			$p->firstname = $request->input('firstname');
+			$p->lastname = $request->input('lastname');
+			$p->adress = $request->input('adress');
+			$p->city = $request->input('city');
+			$p->zip = $request->input('zip');
+			$p->email = $request->input('email');
+			$p->save();
+	    }
+
+		$c = new Code;
+		$c->code = $request->input('code');
+		$c->participant_id = $p->id;
+		$c->save();
+
+		return redirect('/dankjewel');
 	}
 }

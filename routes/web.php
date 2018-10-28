@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'AdminController@indexWinners');
 
 Route::get('/meedoen', function () {
     return view('form');
@@ -21,7 +19,7 @@ Route::get('/meedoen', function () {
 
 Route::post('/meedoen', 'ParticipantsController@store');
 
-Route::resource('/dashboard', 'ParticipantsController');
+Route::resource('/dashboard', 'AdminController');
 
 Route::get('/dankjewel', function () {
     return view('thankyou');

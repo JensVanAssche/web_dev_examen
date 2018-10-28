@@ -8,18 +8,19 @@
                 <a href="/" class="color-black mb-3">terug</a>
                 <form method="POST" action="{{ url('/meedoen') }}">
                     {{ csrf_field() }}
-                    <h1 class="mb-3">Vul uw <span class="color-red">Nutella</span> code in!</h1>
-                    <input type="text" name="code" placeholder="Nutella Code" class="form-control mb-3">
-                    <hr />
                     @if ($errors->any())
                         <div class="alert alert-danger">
-                            <ul>
+                            <ul class="m-0">
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
                         </div>
                     @endif
+                    <h1 class="mb-3">Vul uw <span class="color-red">Nutella</span> code in!</h1>
+                    <p>Let op: Uw code moet uniek en 8 karakters lang zijn</p>
+                    <input type="text" name="code" placeholder="Nutella Code" class="form-control mb-3">
+                    <hr />
                     <h2 class="color-red mb-3">Uw gegevens invullen</h2>
                     <div class="form-row">
                         <div class="col">

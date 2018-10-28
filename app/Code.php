@@ -5,14 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Participant extends Model
+class Code extends Model
 {
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'firstname', 'lastname', 'adress', 'city', 'zip', 'email'
+        'code', 'participant_id'
     ];
 
     /**
@@ -20,10 +20,10 @@ class Participant extends Model
      *
      * @var array
      */
-    protected $table = 'participants';
+    protected $table = 'codes';
 
-    public function code()
+    public function participant()
     {
-        return $this->hasMany('App\Code');
+        return $this->belongsTo('App\Participant');
     }
 }
