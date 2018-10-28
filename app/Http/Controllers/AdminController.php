@@ -88,6 +88,13 @@ class AdminController extends Controller
 	    return redirect()->route('dashboard.index')->with('success', 'Wedstrijd periodes/codes succesvol aangepast');
     }
 
+    public function checkWinner($participant, $code)
+    {
+
+
+    	return view('thankyou')->with('participant', $participant)->with('code', $code);
+    }
+
     public function destroy($id)
 	{
 		$participant = Participant::findOrFail($id);

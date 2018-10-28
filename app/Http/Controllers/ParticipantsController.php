@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Participant;
 use App\Code;
+use App\Admin;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ParticipantsController extends Controller
 {
@@ -41,6 +43,20 @@ class ParticipantsController extends Controller
 		$c->participant_id = $p->id;
 		$c->save();
 
-		return redirect('/dankjewel');
+		$currentDate = Carbon::now()->format('Y-m-d');
+    	$currentAdmin = Admin::where('end', '>', $currentDate)->first();
+    	$currentCode = explode(",", $currentAdmin['code']);
+
+    	foreach ($currentCode as $code) {
+    		if ($c->code == $code) {
+	    		$winBoolean = 1;
+	    		break;
+	    	}
+	    	else {
+	    		$winBoolean = 0;
+	    	}
+    	}
+
+		return view('thankyou')->with('winBoolean', $winBoolean);
 	}
 }

@@ -16,7 +16,7 @@
         </div>
         <div class="col">
             <h2>Prijzen</h2>
-            <p>prijzen hier</p>
+            <p>Een levenslang aan gratis Nutella!</p>
 
             <h2>Winnaars</h2>
             @foreach($winners as $winner)

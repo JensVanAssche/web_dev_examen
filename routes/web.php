@@ -21,10 +21,6 @@ Route::post('/meedoen', 'ParticipantsController@store');
 
 Route::resource('/dashboard', 'AdminController');
 
-Route::get('/dankjewel', function () {
-    return view('thankyou');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
