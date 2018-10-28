@@ -22,16 +22,20 @@ class AdminController extends Controller
     {
     	$currentDate = Carbon::now()->format('Y-m-d');
     	$currentAdmin = Admin::where('end', '>', $currentDate)->first();
-    	$winningCode = Code::where('code', '=', $currentAdmin['code'])->first();
+    	$currentCode = explode(",", $currentAdmin['code']);
+    	$winners = [];
 
-    	if ( empty($winningCode) ) {
-    		$winner = null;
-    	}
-    	else {
-    		$winner = Participant::where('id', '=', $winningCode['participant_id'])->select('firstname', 'lastname')->first();
+    	foreach ($currentCode as $code) {
+    		$winningCode = Code::where('code', '=', $code)->first();
+    		if (empty($winningCode)) {
+	    		array_push($winners, null);
+	    	}
+	    	else {
+	    		array_push($winners, Participant::where('id', '=', $winningCode['participant_id'])->select('firstname', 'lastname')->first());
+	    	}
     	}
 
-    	return view('welcome')->with('currentAdmin', $currentAdmin)->with('winner', $winner);
+    	return view('welcome')->with('currentAdmin', $currentAdmin)->with('winners', $winners);
     }
 
     public function store(Request $request)
@@ -47,10 +51,10 @@ class AdminController extends Controller
     		'period3end' => 'required',
     		'period4end' => 'required',
 
-	        'period1code' => 'required|min:8|max:8',
-	        'period2code' => 'required|min:8|max:8',
-	        'period3code' => 'required|min:8|max:8',
-	        'period4code' => 'required|min:8|max:8'
+	        'period1code' => 'required|min:8',
+	        'period2code' => 'required|min:8',
+	        'period3code' => 'required|min:8',
+	        'period4code' => 'required|min:8'
 	    ]);
 
 		$a1 = new Admin;

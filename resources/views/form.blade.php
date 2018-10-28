@@ -40,7 +40,7 @@
                             <input type="text" name="city" placeholder="Stad" class="form-control mb-3">
                         </div>
                         <div class="col">
-                            <input type="number" name="zip" placeholder="Postcode" class="form-control mb-3">
+                            <input type="text" name="zip" placeholder="Postcode" class="form-control mb-3">
                         </div>
                     </div>
                     <div class="form-row">

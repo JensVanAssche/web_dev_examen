@@ -8,6 +8,8 @@ body {
 
 .admin-nav {
 	background-color: #d90210;
+	position: absolute;
+	width: 100%;
 	p, a { color: #fff; }
 }
 
@@ -23,7 +25,6 @@ body {
 
 	.main-jar {
 		width: 250px;
-		margin-top: 50px;
 	}
 
 	.color-red { color: #d90210; }

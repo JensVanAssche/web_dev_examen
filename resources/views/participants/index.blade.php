@@ -29,7 +29,7 @@
 					<div class="col-1"></div>
 					<div class="col-3"><p class="font-weight-bold">Periode start</p></div>
 					<div class="col-3"><p class="font-weight-bold">Periode eind</p></div>
-					<div class="col-5"><p class="font-weight-bold">Code (8 karakters)</p></div>
+					<div class="col-5"><p class="font-weight-bold">Codes (8 karakters, gescheiden door een komma)</p></div>
 				</div>
 				<div class="form-row">
 					<div class="col-1 font-weight-bold"><p>Periode 1</p></div>

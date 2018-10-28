@@ -6,22 +6,22 @@
             <h1 class="text-center main-title mb-5">Nutella's Grote Wedstrijd</h1>
         </div>
     </div>
-    <div class="row">
+    <div class="row mb-3">
         <div class="col">
-            <h4>Met de code op het deksel van je Nutella pot kan je veel prijzen winnen! Waag nu je kans!</h4>
-            <h4>Volgende winnaar wordt bekend gemaakt op:</h4>
-            <h4>{{ $currentAdmin['end'] }}</h4>
+            <h4 class="mb-5">Met de code op het deksel van je Nutella pot kan je veel prijzen winnen! Waag nu je kans!</h4>
+            <h4>Deze periode loopt van</h4>
+            <p class="mb-2">{{ $currentAdmin['start'] }}</p>
+            <h4>tot</h4>
+            <p class="mb-2">{{ $currentAdmin['end'] }}</p>
         </div>
         <div class="col">
             <h2>Prijzen</h2>
             <p>prijzen hier</p>
 
             <h2>Winnaars</h2>
-            @if(!empty ($winner))
-                <p>{{ $winner['firstname'] }} {{ $winner['lastname'] }}</p>
-            @else
-                <p>Nog geen winnaar</p>
-            @endif
+            @foreach($winners as $winner)
+                <p class="mb-2">{{ $winner['firstname']}} {{ $winner['lastname']}}</p>
+            @endforeach
         </div>
     </div>
     <div class="row">
