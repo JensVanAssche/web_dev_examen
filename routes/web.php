@@ -15,6 +15,8 @@ Route::get('/', 'AdminController@indexWinners');
 
 Route::resource('/meedoen', 'ParticipantsController');
 
+Route::get('/dashboard/excel', 'AdminController@excel')->name('dashboard.excel');
+
 Route::resource('/dashboard', 'AdminController');
 
 Auth::routes();

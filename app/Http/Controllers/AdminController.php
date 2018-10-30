@@ -7,6 +7,8 @@ use App\Code;
 use App\Admin;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ParticipantExport;
 
 class AdminController extends Controller
 {
@@ -90,9 +92,12 @@ class AdminController extends Controller
 
     public function checkWinner($participant, $code)
     {
-
-
     	return view('thankyou')->with('participant', $participant)->with('code', $code);
+    }
+
+    public function excel()
+    {
+    	return Excel::download(new ParticipantExport, 'participants.xlsx');
     }
 
     public function destroy($id)

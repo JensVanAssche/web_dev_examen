@@ -79,7 +79,7 @@
 						<div class="col-5"><input type="text" name="period4code" class="form-control"></div>
 					@endif
 				</div>
-				<button type="submit" class="btn btn-success">Toepassen</button>
+				<button type="submit" class="btn btn-primary">Toepassen</button>
 			</form>
 		</div>
 	</div>
@@ -123,6 +123,7 @@
 					</tr>
 				@endforeach
 			</table>
+			<a href="/dashboard/excel" class="btn btn-primary">Export naar excel</a>
 		</div>
 	</div>
 @endsection
