@@ -12,7 +12,7 @@ class Participant extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'firstname', 'lastname', 'adress', 'city', 'zip', 'email'
+        'firstname', 'lastname', 'adress', 'city', 'zip', 'email', 'ip'
     ];
 
     /**

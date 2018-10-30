@@ -13,11 +13,7 @@
 
 Route::get('/', 'AdminController@indexWinners');
 
-Route::get('/meedoen', function () {
-    return view('form');
-});
-
-Route::post('/meedoen', 'ParticipantsController@store');
+Route::resource('/meedoen', 'ParticipantsController');
 
 Route::resource('/dashboard', 'AdminController');
 

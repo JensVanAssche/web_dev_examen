@@ -21,6 +21,7 @@ class Participants extends Migration
             $table->string('city');
             $table->string('zip');
             $table->string('email')->unique();
+            $table->string('ip');
             $table->timestamps();
             $table->softDeletes();
         });

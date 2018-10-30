@@ -17,35 +17,48 @@
                             </ul>
                         </div>
                     @endif
+                    @if ($message = Session::get('error'))
+                        <div class="alert alert-danger">
+                            <ul class="m-0">
+                                <li>{{ $message }}</li>
+                            </ul>
+                        </div>
+                    @endif
                     <h1 class="mb-3">Vul uw <span class="color-red">Nutella</span> code in!</h1>
                     <p>Let op: Uw code moet uniek en 8 karakters lang zijn</p>
-                    <input type="text" name="code" placeholder="Nutella Code" class="form-control mb-3">
+                    <input type="text" name="code" class="form-control mb-3">
                     <hr />
                     <h2 class="color-red mb-3">Uw gegevens invullen</h2>
                     <div class="form-row">
                         <div class="col">
-                            <input type="text" name="firstname" placeholder="Voornaam" class="form-control mb-3">
+                            <label>Voornaam</label>
+                            <input type="text" name="firstname" class="form-control mb-3">
                         </div>
                         <div class="col">
-                            <input type="text" name="lastname" placeholder="Familienaam" class="form-control mb-3">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col">
-                            <input type="text" name="adress" placeholder="Adres" class="form-control mb-3">
+                            <label>Familienaam</label>
+                            <input type="text" name="lastname" class="form-control mb-3">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col">
-                            <input type="text" name="city" placeholder="Stad" class="form-control mb-3">
-                        </div>
-                        <div class="col">
-                            <input type="text" name="zip" placeholder="Postcode" class="form-control mb-3">
+                            <label>Adres</label>
+                            <input type="text" name="adress" class="form-control mb-3">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col">
-                            <input type="email" name="email" placeholder="E-mail" class="form-control mb-3">
+                            <label>Stad</label>
+                            <input type="text" name="city" class="form-control mb-3">
+                        </div>
+                        <div class="col">
+                            <label>Postcode</label>
+                            <input type="text" name="zip" class="form-control mb-3">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label>E-mail</label>
+                            <input type="email" name="email" class="form-control mb-3">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-danger btn-lg">Ga verder</button>

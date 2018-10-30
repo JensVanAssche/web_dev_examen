@@ -10,6 +10,10 @@ use Carbon\Carbon;
 
 class ParticipantsController extends Controller
 {
+	public function index() {
+		return view('form');
+	}
+
 	public function store(Request $request)
 	{
 		$request->validate([
@@ -23,11 +27,28 @@ class ParticipantsController extends Controller
 	    ]);
 
 	    if(Participant::where('email', '=', $request->input('email'))->exists()) {
-	    	//email exists
+	    	// email exists
 	    	$p = Participant::where('email', '=', $request->input('email'))->first();
+
+	    	// check of alle data overeenkomt met de gegeven email
+	    	if ($p->firstname != $request->input('firstname')) {
+	    		return redirect()->route('meedoen.index')->with('error', "First name doesn't match the record of the e-mail");
+	    	}
+	    	if ($p->lastname != $request->input('lastname')) {
+	    		return redirect()->route('meedoen.index')->with('error', "Last name doesn't match the record of the e-mail");
+	    	}
+	    	if ($p->adress != $request->input('adress')) {
+	    		return redirect()->route('meedoen.index')->with('error', "Adress doesn't match the record of the e-mail");
+	    	}
+	    	if ($p->city != $request->input('city')) {
+	    		return redirect()->route('meedoen.index')->with('error', "City doesn't match the record of the e-mail");
+	    	}
+	    	if ($p->zip != $request->input('zip')) {
+	    		return redirect()->route('meedoen.index')->with('error', "Zip doesn't match the record of the e-mail");
+	    	}
 	    }
 	    else {
-	    	//email doesnt exist
+	    	// email doesnt exist
 			$p = new Participant;
 			$p->firstname = $request->input('firstname');
 			$p->lastname = $request->input('lastname');
@@ -35,13 +56,14 @@ class ParticipantsController extends Controller
 			$p->city = $request->input('city');
 			$p->zip = $request->input('zip');
 			$p->email = $request->input('email');
+			$p->ip = $request->ip();
 			$p->save();
 	    }
 
 		$c = new Code;
 		$c->code = $request->input('code');
 		$c->participant_id = $p->id;
-		$c->save();
+		$c->save();		
 
 		$currentDate = Carbon::now()->format('Y-m-d');
     	$currentAdmin = Admin::where('end', '>', $currentDate)->first();
