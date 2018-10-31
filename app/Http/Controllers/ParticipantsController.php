@@ -66,7 +66,7 @@ class ParticipantsController extends Controller
 		$c->save();		
 
 		$currentDate = Carbon::now()->format('Y-m-d');
-    	$currentAdmin = Admin::where('end', '>', $currentDate)->first();
+    	$currentAdmin = Admin::where('end', '>=', $currentDate)->first();
     	$currentCode = explode(",", $currentAdmin['code']);
 
     	foreach ($currentCode as $code) {

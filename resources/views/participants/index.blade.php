@@ -88,7 +88,7 @@
 			<h5 >Deelnemers</h5>
 		</div>
 		<div class="card-body">
-			<table>
+			<table class="mb-3">
 				<tr>
 					<th>Voornaam</th>
 					<th>Achternaam</th>

@@ -23,7 +23,7 @@ class AdminController extends Controller
     public function indexWinners()
     {
     	$currentDate = Carbon::now()->format('Y-m-d');
-    	$currentAdmin = Admin::where('end', '>', $currentDate)->first();
+    	$currentAdmin = Admin::where('end', '>=', $currentDate)->first();
     	$currentCode = explode(",", $currentAdmin['code']);
     	$winners = [];
 
@@ -87,12 +87,7 @@ class AdminController extends Controller
 	    $a3->save();
 	    $a4->save();
 
-	    return redirect()->route('dashboard.index')->with('success', 'Wedstrijd periodes/codes succesvol aangepast');
-    }
-
-    public function checkWinner($participant, $code)
-    {
-    	return view('thankyou')->with('participant', $participant)->with('code', $code);
+	    return redirect()->route('dashboard.index')->with('success', 'Wedstrijd periodes en codes succesvol aangepast');
     }
 
     public function excel()

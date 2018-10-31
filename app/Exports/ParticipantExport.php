@@ -13,6 +13,22 @@ class ParticipantExport implements FromCollection
     */
     public function collection()
     {
-        return Participant::all();
-    }
+    	$participants = Participant::all();
+		$codes = Code::All();
+
+		
+
+		foreach ($participants as $participant) {
+			foreach ($codes as $code) {
+				if ($code->participant_id == $participant->id) {
+					$participant['codes'] .= $code->code;
+					$participant['codes'] .= ', ';
+				}
+			}
+		}
+
+		$participants->prepend(['id', 'firstname', 'lastname', 'adress', 'city', 'zip', 'email', 'ip', 'created_at', 'updated_at', 'deleted_at', 'codes']);
+
+		return $participants;
+	}
 }
