@@ -1,5 +1,5 @@
 # Web Dev Examen Opdracht
-## Nutella Wedrijd by Jens Van Assche
+## Nutella Wedstrijd by Jens Van Assche
 
 ### Setup:
 

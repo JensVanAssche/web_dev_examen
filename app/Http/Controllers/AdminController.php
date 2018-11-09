@@ -50,13 +50,15 @@ class AdminController extends Controller
 		$currentAdmin = Admin::where('start', '<=', $currentDate)->where('end', '>=', $currentDate)->first();
 		if($currentAdmin == Null) {
 			$currentPeriod = 0;
+			$currentPeriodStart = Admin::where('start', '>=', $currentDate)->first();
+			$nextPeriod = date('d/m/Y', strtotime($currentPeriodStart['start']));
 		}
 		else {
 			$currentPeriod['start'] = date('d/m/Y', strtotime($currentAdmin['start']));
 			$currentPeriod['end'] = date('d/m/Y', strtotime($currentAdmin['end']));
 		}
 
-		return view('welcome')->with('currentPeriod', $currentPeriod)->with('winners', $winners);
+		return view('welcome')->with('currentPeriod', $currentPeriod)->with('winners', $winners)->with('nextPeriod', $nextPeriod);
 	}
 
     public function store(Request $request)
