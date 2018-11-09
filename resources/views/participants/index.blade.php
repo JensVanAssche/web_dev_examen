@@ -15,6 +15,13 @@
             </ul>
         </div>
     @endif
+    @if ($message = Session::get('error'))
+        <div class="alert alert-danger">
+            <ul class="m-0">
+                <li>{{ $message }}</li>
+            </ul>
+        </div>
+    @endif
 	<div class="mb-2">
 		<a href="/">Terug naar home</a>
 	</div>

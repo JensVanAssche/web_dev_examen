@@ -25,40 +25,40 @@
                         </div>
                     @endif
                     <h1 class="mb-3">Vul uw <span class="color-red">Nutella</span> code in!</h1>
-                    <p>Let op: Uw code moet uniek en 8 karakters lang zijn</p>
-                    <input type="text" name="code" class="form-control mb-3">
+                    <p>Let op: Uw code moet uniek en 8 karakters lang zijn. De code is hoofdletter gevoelig!</p>
+                    <input type="text" name="code" class="form-control mb-3" required>
                     <hr />
                     <h2 class="color-red mb-3">Uw gegevens invullen</h2>
                     <div class="form-row">
                         <div class="col">
                             <label>Voornaam</label>
-                            <input type="text" name="firstname" class="form-control mb-3">
+                            <input type="text" name="firstname" class="form-control mb-3" required>
                         </div>
                         <div class="col">
                             <label>Familienaam</label>
-                            <input type="text" name="lastname" class="form-control mb-3">
+                            <input type="text" name="lastname" class="form-control mb-3" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col">
                             <label>Adres</label>
-                            <input type="text" name="adress" class="form-control mb-3">
+                            <input type="text" name="adress" class="form-control mb-3" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col">
                             <label>Stad</label>
-                            <input type="text" name="city" class="form-control mb-3">
+                            <input type="text" name="city" class="form-control mb-3" required>
                         </div>
                         <div class="col">
                             <label>Postcode</label>
-                            <input type="text" name="zip" class="form-control mb-3">
+                            <input type="text" name="zip" class="form-control mb-3" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col">
                             <label>E-mail</label>
-                            <input type="email" name="email" class="form-control mb-3">
+                            <input type="email" name="email" class="form-control mb-3" required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-danger btn-lg">Ga verder</button>

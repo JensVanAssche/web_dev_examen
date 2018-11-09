@@ -12,33 +12,41 @@ use App\Exports\ParticipantExport;
 
 class AdminController extends Controller
 {
-    public function index()
-    {
-        $participants = Participant::all();
-        $codes = Code::all();
-        $admin = Admin::all();
-        return view('participants.index')->with('participants', $participants)->with('codes', $codes)->with('admin', $admin);
-    }
+	public function index()
+	{
+		$participants = Participant::all();
+		$codes = Code::all();
+		$admin = Admin::all();
+		return view('participants.index')->with('participants', $participants)->with('codes', $codes)->with('admin', $admin);
+	}
 
-    public function indexWinners()
-    {
-    	$currentDate = Carbon::now()->format('Y-m-d');
-    	$currentAdmin = Admin::where('end', '>=', $currentDate)->first();
-    	$currentCode = explode(",", $currentAdmin['code']);
-    	$winners = [];
+	public function indexWinners()
+	{
+		$winners = [];
+		for ($i = 1; $i < 5; $i++) {
+			$periodWinners = [];
+			$period = Admin::where('period', '=', "$i")->first();
+			$codes = explode(",", $period['code']);
 
-    	foreach ($currentCode as $code) {
-    		$winningCode = Code::where('code', '=', $code)->first();
-    		if (empty($winningCode)) {
-	    		array_push($winners, null);
-	    	}
-	    	else {
-	    		array_push($winners, Participant::where('id', '=', $winningCode['participant_id'])->select('firstname', 'lastname')->first());
-	    	}
-    	}
+			foreach ($codes as $code) {
+				$winningCode = Code::whereRaw("BINARY `code`= ?", $code)->first();
+				if (empty($winningCode)) {
+					
+				}
+				else {
+					array_push($periodWinners, Participant::where('id', '=', $winningCode['participant_id'])->select('firstname', 'lastname')->first());
+				}
+			}
+			array_push($winners, $periodWinners);
+		}
+		
+		$currentDate = Carbon::now()->format('Y-m-d');
+		$currentAdmin = Admin::where('end', '>=', $currentDate)->first();
+		$currentPeriod['start'] = date('d/m/Y', strtotime($currentAdmin['start']));
+		$currentPeriod['end'] = date('d/m/Y', strtotime($currentAdmin['end']));
 
-    	return view('welcome')->with('currentAdmin', $currentAdmin)->with('winners', $winners);
-    }
+		return view('welcome')->with('currentPeriod', $currentPeriod)->with('winners', $winners);
+	}
 
     public function store(Request $request)
     {
@@ -53,11 +61,50 @@ class AdminController extends Controller
     		'period3end' => 'required',
     		'period4end' => 'required',
 
-	        'period1code' => 'required|min:8',
-	        'period2code' => 'required|min:8',
-	        'period3code' => 'required|min:8',
-	        'period4code' => 'required|min:8'
+	        'period1code' => 'required',
+	        'period2code' => 'required',
+	        'period3code' => 'required',
+	        'period4code' => 'required'
 	    ]);
+
+	    if($request->input('period1start') >= $request->input('period1end')) {
+	    	return redirect()->route('dashboard.index')->with('error', "Periode 1 niet correct ingesteld");
+	    }
+	    if($request->input('period2start') >= $request->input('period2end')) {
+	    	return redirect()->route('dashboard.index')->with('error', "Periode 2 niet correct ingesteld");
+	    }
+	    if($request->input('period3start') >= $request->input('period3end')) {
+	    	return redirect()->route('dashboard.index')->with('error', "Periode 3 niet correct ingesteld");
+	    }
+	    if($request->input('period4start') >= $request->input('period4end')) {
+	    	return redirect()->route('dashboard.index')->with('error', "Periode 4 niet correct ingesteld");
+	    }
+
+	    $codep1array = explode(",", $request->input('period1code'));
+	    $codep2array = explode(",", $request->input('period2code'));
+	    $codep3array = explode(",", $request->input('period3code'));
+		$codep4array = explode(",", $request->input('period4code'));
+
+    	foreach ($codep1array as $code) {
+    		if(strlen($code) != 8) {
+    			return redirect()->route('dashboard.index')->with('error', "Code 1 moet 8 karakters lang zijn");
+    		}
+    	}
+    	foreach ($codep2array as $code) {
+    		if(strlen($code) != 8) {
+    			return redirect()->route('dashboard.index')->with('error', "Code 2 moet 8 karakters lang zijn");
+    		}
+    	}
+    	foreach ($codep3array as $code) {
+    		if(strlen($code) != 8) {
+    			return redirect()->route('dashboard.index')->with('error', "Code 3 moet 8 karakters lang zijn");
+    		}
+    	}
+    	foreach ($codep4array as $code) {
+    		if(strlen($code) != 8) {
+    			return redirect()->route('dashboard.index')->with('error', "Code 4 moet 8 karakters lang zijn");
+    		}
+    	}
 
 		$a1 = new Admin;
 	    $a1->period = 1;
