@@ -36,9 +36,9 @@ body {
 	.color-red { color: $red; }
 
 	.color-black { color: #000; }
+}
 
-	.card {
-		box-shadow: 0px 5px 25px;
-		margin-bottom: 100px;
-	}
+.card {
+	box-shadow: 0px 5px 25px;
+	margin-bottom: 100px;
 }

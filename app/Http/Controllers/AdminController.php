@@ -9,15 +9,22 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ParticipantExport;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
 	public function index()
 	{
-		$participants = Participant::all();
-		$codes = Code::all();
-		$admin = Admin::all();
-		return view('participants.index')->with('participants', $participants)->with('codes', $codes)->with('admin', $admin);
+		if (Auth::check()) {
+			$participants = Participant::all();
+			$codes = Code::all();
+			$admin = Admin::all();
+			return view('participants.index')->with('participants', $participants)->with('codes', $codes)->with('admin', $admin);
+		}
+		else {
+			return redirect('/');
+		}
+		
 	}
 
 	public function indexWinners()
