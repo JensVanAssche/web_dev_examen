@@ -24,7 +24,6 @@ class AdminController extends Controller
 		else {
 			return redirect('/');
 		}
-		
 	}
 
 	public function indexWinners()
@@ -48,9 +47,14 @@ class AdminController extends Controller
 		}
 		
 		$currentDate = Carbon::now()->format('Y-m-d');
-		$currentAdmin = Admin::where('end', '>=', $currentDate)->first();
-		$currentPeriod['start'] = date('d/m/Y', strtotime($currentAdmin['start']));
-		$currentPeriod['end'] = date('d/m/Y', strtotime($currentAdmin['end']));
+		$currentAdmin = Admin::where('start', '<=', $currentDate)->where('end', '>=', $currentDate)->first();
+		if($currentAdmin == Null) {
+			$currentPeriod = 0;
+		}
+		else {
+			$currentPeriod['start'] = date('d/m/Y', strtotime($currentAdmin['start']));
+			$currentPeriod['end'] = date('d/m/Y', strtotime($currentAdmin['end']));
+		}
 
 		return view('welcome')->with('currentPeriod', $currentPeriod)->with('winners', $winners);
 	}

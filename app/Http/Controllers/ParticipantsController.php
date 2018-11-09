@@ -12,7 +12,15 @@ use Mail;
 class ParticipantsController extends Controller
 {
 	public function index() {
-		return view('form');
+		$currentDate = Carbon::now()->format('Y-m-d');
+		$currentAdmin = Admin::where('start', '<=', $currentDate)->where('end', '>=', $currentDate)->first();
+		if($currentAdmin == Null) {
+			return redirect('/');
+		}
+		else {
+			return view('form');
+		}
+		
 	}
 
 	public function store(Request $request)
