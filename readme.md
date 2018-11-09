@@ -7,7 +7,7 @@ Stap 1: pull van github \
 Stap 2: voer command uit: composer install \
 Stap 3: voer command uit: npm install \
 Stap 4: copieer .env.example naar .env en vul correcte db data in \
-Vul deze gegevens in voor de mailservice: \
+Vul deze gegevens in voor de mailservice:
 
 	MAIL_DRIVER=mailgun
 	MAIL_HOST=smtp.mailgun.org
