@@ -10,9 +10,9 @@
     <div class="row mb-3">
         <div class="col">
             <h4 class="mb-5">Met de code op het deksel van je Nutella pot kan je veel prijzen winnen! Waag nu je kans!</h4>
-            @if ($currentPeriod == 0)
+            @if ($currentPeriod['start'] == 0)
                 <h4>Er is momenteel geen periode bezig, kom later nog eens terug</h4>
-                <h4>Volgende periode start op {{ $nextPeriod }}</h4>
+                <h4>Volgende periode start op {{ $currentPeriod['next'] }}</h4>
             @else
                 <h4>Deze periode loopt</h4>
                 <h4>van {{ $currentPeriod['start'] }} tot {{ $currentPeriod['end'] }}</h4>
@@ -63,7 +63,7 @@
     </div>
     <div class="row">
         <div class="col d-flex justify-content-center">
-            @if ($currentPeriod != 0)
+            @if ($currentPeriod['start'] != 0)
                 <a href="/meedoen" class="btn btn-danger btn-lg py-3 px-4">Deelnemen!</a>
             @endif
         </div>
