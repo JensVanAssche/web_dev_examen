@@ -7,6 +7,7 @@ use App\Code;
 use App\Admin;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Mail;
 
 class ParticipantsController extends Controller
 {
@@ -72,7 +73,19 @@ class ParticipantsController extends Controller
     	foreach ($currentCode as $code) {
     		if ($c->code == $code) {
 	    		$winBoolean = 1;
-	    		break;
+	    		Mail::send('emails.winner', ['firstname' => $request->input('firstname'),
+											'lastname' => $request->input('lastname'),
+											'adress' => $request->input('adress'),
+											'city' => $request->input('city'),
+											'zip' => $request->input('zip'),
+											'email' => $request->input('email'),
+											'code' => $request->input('code')],
+					function ($message) {
+						$message->from('admin@nutella.com', 'Admin');
+						$message->to('teamtimocheese@gmail.com');
+						$message->subject('Winnaar!');
+			    });
+		        break;
 	    	}
 	    	else {
 	    		$winBoolean = 0;
